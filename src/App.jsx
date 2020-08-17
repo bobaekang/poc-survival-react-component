@@ -1,7 +1,8 @@
 import React from 'react'
+import SurvivalPlot from './SurvivalAnalysis/index'
 
 function App() {
-  return <h1>poc-survival-react-component</h1>
+  return <SurvivalPlot />
 }
 
 export default App
