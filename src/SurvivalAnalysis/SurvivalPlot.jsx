@@ -7,7 +7,6 @@ const styles = {
     minHeight: '300px',
     padding: '.5rem',
     textAlign: 'center',
-    width: '100%',
   },
 }
 

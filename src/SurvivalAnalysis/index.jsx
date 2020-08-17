@@ -8,17 +8,20 @@ const styles = {
   container: {
     backgroundColor: 'white',
     display: 'flex',
+    flexWrap: 'wrap',
     justifyContent: 'center',
+    maxWidth: '1280px',
+    margin: '0 auto',
     padding: '12px',
   },
   columnLeft: {
     display: 'flex',
-    minWidth: '33%',
+    flexGrow: 1,
   },
   columnRight: {
     display: 'flex',
     flexDirection: 'column',
-    minWidth: '50%',
+    flexGrow: 2,
   },
 }
 
