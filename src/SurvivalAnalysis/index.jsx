@@ -2,7 +2,7 @@ import React from 'react'
 import ControlForm from './ControlForm'
 import RiskTable from './RiskTable'
 import SurvivalPlot from './SurvivalPlot'
-import { factors } from '../mockData'
+import { factors, result } from '../mockData'
 
 const styles = {
   container: {
@@ -25,9 +25,23 @@ const styles = {
   },
 }
 
+const fetchSurvivalResult = ({ factorVariable, stratificationVariable }) =>
+  Promise.resolve(
+    result[
+      factorVariable
+        ? stratificationVariable
+          ? `${factorVariable}_${stratificationVariable}`.toLowerCase()
+          : factorVariable.toLowerCase()
+        : 'all'
+    ]
+  )
+
 const SurvivalAnalysis = () => {
   const handleSubmit = (userInput) => {
     console.log('user input', userInput)
+    fetchSurvivalResult(userInput).then((result) =>
+      console.log('result', result)
+    )
   }
 
   return (
