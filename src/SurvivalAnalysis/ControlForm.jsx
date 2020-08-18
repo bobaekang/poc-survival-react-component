@@ -46,33 +46,33 @@ const ControlFormSelect = ({ label, options, ...selectAttrs }) => (
 )
 
 const ControlForm = ({ factors, onSubmit }) => {
-  const [treatment, setTreatment] = useState('')
-  const [confounder, setConfounder] = useState('')
+  const [factorVariable, setFactorVariable] = useState('')
+  const [stratificationVariable, setStratificationVariable] = useState('')
 
   return (
     <div style={styles.container}>
-      <h1>Select factors</h1>
+      <h1>Select variables</h1>
       <form>
         <ControlFormSelect
-          label="Treatment"
+          label="Factor variable"
           options={factors}
           onChange={(e) => {
-            if (e.target.value === '') setConfounder('')
-            setTreatment(e.target.value)
+            if (e.target.value === '') setStratificationVariable('')
+            setFactorVariable(e.target.value)
           }}
-          value={treatment}
+          value={factorVariable}
         />
         <ControlFormSelect
-          label="Confounder"
-          options={factors.filter(({ value }) => value !== treatment)}
-          disabled={treatment === ''}
-          onChange={(e) => setConfounder(e.target.value)}
-          value={confounder}
+          label="Stratification variable"
+          options={factors.filter(({ value }) => value !== factorVariable)}
+          disabled={factorVariable === ''}
+          onChange={(e) => setStratificationVariable(e.target.value)}
+          value={stratificationVariable}
         />
         <button
           onClick={(e) => {
             e.preventDefault()
-            onSubmit({ treatment, confounder })
+            onSubmit({ factorVariable, stratificationVariable })
           }}
         >
           Apply
