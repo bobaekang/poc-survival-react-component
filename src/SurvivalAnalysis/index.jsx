@@ -2,7 +2,8 @@ import React from 'react'
 import ControlForm from './ControlForm'
 import RiskTable from './RiskTable'
 import SurvivalPlot from './SurvivalPlot'
-import { factors, result } from '../mockData'
+import { factors } from '../mockData'
+import { fetchSurvivalResult } from './utils'
 
 const styles = {
   container: {
@@ -24,32 +25,6 @@ const styles = {
     flexGrow: 2,
   },
 }
-
-const fetchSurvivalResult = ({ factorVariable, stratificationVariable }) =>
-  Promise.resolve(
-    result[
-      factorVariable
-        ? stratificationVariable
-          ? `${factorVariable}_${stratificationVariable}`.toLowerCase()
-          : factorVariable.toLowerCase()
-        : 'all'
-    ]
-  )
-
-const getSurvivalSeries = (survival, userInput) =>
-  userInput.factorVariable === ''
-    ? [{ name: 'All', data: survival }]
-    : userInput.stratificationVariable === ''
-    ? Object.keys(survival).map((key) => ({ name: key, data: survival[key] }))
-    : Object.keys(survival).reduce((acc, key) => {
-        const [factorKey, stratificationKey] = key.split(', ')
-        const series = [{ name: factorKey, data: survival[key] }]
-        const stratificationValue = acc.hasOwnProperty(stratificationKey)
-          ? [...acc[stratificationKey], ...series]
-          : series
-
-        return { ...acc, [stratificationKey]: stratificationValue }
-      }, {})
 
 const SurvivalAnalysis = () => {
   const handleSubmit = (userInput) => {
