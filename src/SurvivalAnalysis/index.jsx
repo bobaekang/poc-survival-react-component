@@ -4,27 +4,7 @@ import RiskTable from './RiskTable'
 import SurvivalPlot from './SurvivalPlot'
 import { factors } from '../mockData'
 import { fetchSurvivalResult } from './utils'
-
-const styles = {
-  container: {
-    backgroundColor: 'white',
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    maxWidth: '1280px',
-    margin: '0 auto',
-    padding: '12px',
-  },
-  columnLeft: {
-    display: 'flex',
-    flexGrow: 1,
-  },
-  columnRight: {
-    display: 'flex',
-    flexDirection: 'column',
-    flexGrow: 2,
-  },
-}
+import styles from './SurvivalAnalysis.module.css'
 
 const SurvivalAnalysis = () => {
   const handleSubmit = (userInput) => {
@@ -35,11 +15,11 @@ const SurvivalAnalysis = () => {
   }
 
   return (
-    <div style={styles.container}>
-      <div style={styles.columnLeft}>
+    <div className={styles.container}>
+      <div className={styles.columnLeft}>
         <ControlForm factors={factors} onSubmit={handleSubmit} />
       </div>
-      <div style={styles.columnRight}>
+      <div className={styles.columnRight}>
         <SurvivalPlot />
         <RiskTable />
       </div>
