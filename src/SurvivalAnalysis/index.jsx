@@ -36,6 +36,21 @@ const fetchSurvivalResult = ({ factorVariable, stratificationVariable }) =>
     ]
   )
 
+const getSurvivalSeries = (survival, userInput) =>
+  userInput.factorVariable === ''
+    ? [{ name: 'All', data: survival }]
+    : userInput.stratificationVariable === ''
+    ? Object.keys(survival).map((key) => ({ name: key, data: survival[key] }))
+    : Object.keys(survival).reduce((acc, key) => {
+        const [factorKey, stratificationKey] = key.split(', ')
+        const series = [{ name: factorKey, data: survival[key] }]
+        const stratificationValue = acc.hasOwnProperty(stratificationKey)
+          ? [...acc[stratificationKey], ...series]
+          : series
+
+        return { ...acc, [stratificationKey]: stratificationValue }
+      }, {})
+
 const SurvivalAnalysis = () => {
   const handleSubmit = (userInput) => {
     console.log('user input', userInput)
