@@ -22,7 +22,7 @@ const SurvivalAnalysis = () => {
         <ControlForm factors={factors} onSubmit={handleSubmit} />
       </div>
       <div className={styles.columnRight}>
-        <SurvivalPlot />
+        <SurvivalPlot data={survivalSeries} />
         <RiskTable />
       </div>
     </div>
