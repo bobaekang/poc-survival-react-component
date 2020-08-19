@@ -57,7 +57,12 @@ const ControlForm = ({ factors, onSubmit }) => {
           label="Factor variable"
           options={factors}
           onChange={(e) => {
-            if (e.target.value === '') setStratificationVariable('')
+            if (
+              e.target.value === '' ||
+              e.target.value === stratificationVariable
+            )
+              setStratificationVariable('')
+
             setFactorVariable(e.target.value)
           }}
           value={factorVariable}
