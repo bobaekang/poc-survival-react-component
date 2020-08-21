@@ -12,8 +12,6 @@ import { schemeCategory10 } from 'd3-scale-chromatic'
 
 const styles = {
   container: {
-    border: '1px solid #999',
-    margin: '.5rem',
     minHeight: '300px',
     padding: '.5rem',
     textAlign: 'center',

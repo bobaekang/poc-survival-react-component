@@ -2,8 +2,6 @@ import React from 'react'
 
 const styles = {
   container: {
-    border: '1px solid #999',
-    margin: '.5rem',
     minHeight: '150px',
     padding: '.5rem',
     textAlign: 'center',

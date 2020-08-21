@@ -2,9 +2,7 @@ import React, { useState } from 'react'
 
 const styles = {
   container: {
-    border: '1px solid #999',
-    margin: '.5rem',
-    padding: '1rem .5rem',
+    padding: '.5rem',
     textAlign: 'center',
     width: '100%',
   },
