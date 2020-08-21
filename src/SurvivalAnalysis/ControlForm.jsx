@@ -27,10 +27,17 @@ const styles = {
   },
 }
 
-const ControlFormSelect = ({ label, options, ...selectAttrs }) => (
+const ControlFormField = ({ label, input }) => (
   <div style={styles.inputContainer.container}>
     <label style={styles.inputContainer.label}>{label}</label>
-    <div style={styles.inputContainer.input}>
+    <div style={styles.inputContainer.input}>{input}</div>
+  </div>
+)
+
+const ControlFormSelect = ({ label, options, ...selectAttrs }) => (
+  <ControlFormField
+    label={label}
+    input={
       <select style={styles.field} {...selectAttrs}>
         <option value="">--Please choose an option--</option>
         {options.map(({ label, value }) => (
@@ -39,8 +46,8 @@ const ControlFormSelect = ({ label, options, ...selectAttrs }) => (
           </option>
         ))}
       </select>
-    </div>
-  </div>
+    }
+  />
 )
 
 const ControlForm = ({ factors, onSubmit }) => {
