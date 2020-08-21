@@ -25,7 +25,7 @@ const styles = {
 }
 
 const Plot = ({ data }) => (
-  <ResponsiveContainer aspect={2.5} height={300}>
+  <ResponsiveContainer aspect={2.5} height={250}>
     <LineChart margin={{ left: 20, bottom: 10, right: 20 }}>
       <XAxis
         dataKey="time"
