@@ -9,6 +9,7 @@ import {
   Legend,
 } from 'recharts'
 import { schemeCategory10 } from 'd3-scale-chromatic'
+import { getXAxisTicks } from './utils'
 
 const styles = {
   container: {
@@ -35,6 +36,7 @@ const Plot = ({ data }) => (
           position: 'insideBottom',
           offset: -5,
         }}
+        ticks={getXAxisTicks(data)}
       />
       <YAxis
         label={{
