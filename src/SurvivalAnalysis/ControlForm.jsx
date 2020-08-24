@@ -50,6 +50,13 @@ const ControlFormSelect = ({ label, options, ...selectAttrs }) => (
   />
 )
 
+const ControlFormInput = ({ label, ...inputAttrs }) => (
+  <ControlFormField
+    label={label}
+    input={<input style={styles.field} {...inputAttrs} />}
+  />
+)
+
 const ControlForm = ({ factors, onSubmit }) => {
   const [factorVariable, setFactorVariable] = useState('')
   const [stratificationVariable, setStratificationVariable] = useState('')
