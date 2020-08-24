@@ -9,6 +9,7 @@ import styles from './SurvivalAnalysis.module.css'
 const SurvivalAnalysis = () => {
   const [survivalSeries, setSurvivalSeries] = useState([])
   const [risktable, setRisktable] = useState([])
+  const [timeInterval, setTimeInterval] = useState(2)
   const handleSubmit = (userInput) => {
     console.log('user input', userInput)
     fetchSurvivalResult(userInput).then((result) => {
