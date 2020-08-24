@@ -27,7 +27,7 @@ const styles = {
 
 const Plot = ({ data }) => (
   <ResponsiveContainer height={300}>
-    <LineChart margin={{ left: 20, bottom: 10, right: 20 }}>
+    <LineChart data={data} margin={{ left: 20, bottom: 10, right: 20 }}>
       <XAxis
         dataKey="time"
         type="number"
