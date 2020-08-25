@@ -63,7 +63,7 @@ const ControlForm = ({ factors, onSubmit, timeInterval }) => {
   const [stratificationVariable, setStratificationVariable] = useState('')
   const [localTimeInterval, setLocalTimeInterval] = useState(timeInterval)
   const [startTime, setStartTime] = useState(0)
-  const [endTime, setEndTime] = useState(10)
+  const [endTime, setEndTime] = useState(20)
   const [efsFlag, setEfsFlag] = useState(false)
 
   useEffect(() => {
