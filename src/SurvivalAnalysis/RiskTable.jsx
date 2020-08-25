@@ -13,6 +13,13 @@ import './RiskTable.css'
 
 const isStratified = (data) => data[0].name.split(',').length > 1
 
+const parseRisktable = (data, timeInterval) => {
+  const minTime = data[0].data[0].time
+  return data
+    .flatMap(({ name, data }) => data.map((d) => ({ name, ...d })))
+    .filter(({ time }) => (time - minTime) % timeInterval === 0)
+}
+
 const RiskTable = ({ data, timeInterval }) => (
   <div className={styles.container}>
     {data.length === 0 ? (
@@ -52,9 +59,7 @@ const RiskTable = ({ data, timeInterval }) => (
               tick={{ dx: -20 }}
             />
             <Scatter
-              data={data
-                .flatMap(({ name, data }) => data.map((d) => ({ name, ...d })))
-                .filter(({ time }) => time % timeInterval === 0)}
+              data={parseRisktable(data, timeInterval)}
               fill="transparent"
             >
               <LabelList dataKey="nrisk" />
