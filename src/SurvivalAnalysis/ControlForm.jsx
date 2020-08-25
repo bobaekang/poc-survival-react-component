@@ -74,6 +74,7 @@ const ControlForm = ({ factors, onSubmit, timeInterval }) => {
       factorVariable,
       stratificationVariable,
       timeInterval: localTimeInterval,
+      ...(isUsingPocMicroservice ? { startTime, endTime, efsFlag } : {}),
     })
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -149,6 +150,9 @@ const ControlForm = ({ factors, onSubmit, timeInterval }) => {
               factorVariable,
               stratificationVariable,
               timeInterval: localTimeInterval,
+              ...(isUsingPocMicroservice
+                ? { startTime, endTime, efsFlag }
+                : {}),
             })
           }}
         >
