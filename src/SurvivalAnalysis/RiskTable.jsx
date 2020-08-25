@@ -18,6 +18,8 @@ const styles = {
   },
 }
 
+const isStratified = (data) => data[0].name.split(',').length > 1
+
 const RiskTable = ({ data, timeInterval }) => (
   <div style={styles.container}>
     <h1>risk table here</h1>
@@ -26,7 +28,13 @@ const RiskTable = ({ data, timeInterval }) => (
         className="risktable"
         height={(data.length + 2) * 30}
       >
-        <ScatterChart margin={{ left: 20, bottom: 10, right: 20 }}>
+        <ScatterChart
+          margin={{
+            left: isStratified(data) ? 80 : 20,
+            bottom: 10,
+            right: 20,
+          }}
+        >
           <XAxis
             dataKey="time"
             type="number"
