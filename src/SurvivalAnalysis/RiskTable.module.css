@@ -3,10 +3,6 @@
   padding: 0.5rem;
 }
 
-.risktable .yAxis tspan {
-  font-size: 0.8rem;
-}
-
 .placeholder {
   border: 1px dashed lightgray;
   color: gray;

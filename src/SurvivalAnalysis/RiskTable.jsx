@@ -9,6 +9,7 @@ import {
 } from 'recharts'
 import { getXAxisTicks } from './utils'
 import styles from './RiskTable.module.css'
+import './RiskTable.css'
 
 const isStratified = (data) => data[0].name.split(',').length > 1
 
@@ -20,7 +21,7 @@ const RiskTable = ({ data, timeInterval }) => (
       <>
         <span style={{ marginLeft: '1rem' }}># at risk</span>
         <ResponsiveContainer
-          className={styles.risktable}
+          className="risktable"
           height={(data.length + 2) * 30}
         >
           <ScatterChart
