@@ -4,10 +4,7 @@ export const isUsingPocMicroservice =
   process.env.REACT_APP_POC_MICROSERVICE_URL &&
   process.env.REACT_APP_POC_MICROSERVICE_URL !== ''
 
-export const fetchSurvivalResult = ({
-  factorVariable,
-  stratificationVariable,
-}) =>
+const fetchMockSurvivalResult = ({ factorVariable, stratificationVariable }) =>
   Promise.resolve(
     result[
       factorVariable
@@ -17,6 +14,21 @@ export const fetchSurvivalResult = ({
         : 'all'
     ]
   )
+
+const fetchPocSurvivalResult = ({ timeInterval, ...userInput }) =>
+  fetch(process.env.REACT_APP_POC_MICROSERVICE_URL, {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userInput),
+  }).then((response) => response.json())
+
+export const fetchSurvivalResult = isUsingPocMicroservice
+  ? fetchPocSurvivalResult
+  : fetchMockSurvivalResult
 
 export const getSurvivalSeries = (survival, userInput) =>
   userInput.factorVariable === '' || userInput.stratificationVariable === ''
