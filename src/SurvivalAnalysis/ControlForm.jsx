@@ -57,9 +57,10 @@ const ControlFormInput = ({ label, ...inputAttrs }) => (
   />
 )
 
-const ControlForm = ({ factors, onSubmit }) => {
+const ControlForm = ({ factors, onSubmit, timeInterval }) => {
   const [factorVariable, setFactorVariable] = useState('')
   const [stratificationVariable, setStratificationVariable] = useState('')
+  const [localTimeInterval, setLocalTimeInterval] = useState(timeInterval)
 
   return (
     <div style={styles.container}>
@@ -86,10 +87,25 @@ const ControlForm = ({ factors, onSubmit }) => {
           onChange={(e) => setStratificationVariable(e.target.value)}
           value={stratificationVariable}
         />
+        <ControlFormInput
+          label="Time interval (1 to 5)"
+          type="number"
+          min={1}
+          max={5}
+          step={1}
+          onChange={(e) =>
+            setLocalTimeInterval(Number.parseInt(e.target.value))
+          }
+          value={localTimeInterval}
+        />
         <button
           onClick={(e) => {
             e.preventDefault()
-            onSubmit({ factorVariable, stratificationVariable })
+            onSubmit({
+              factorVariable,
+              stratificationVariable,
+              timeInterval: localTimeInterval,
+            })
           }}
         >
           Apply

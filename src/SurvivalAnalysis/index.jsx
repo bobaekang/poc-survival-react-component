@@ -12,6 +12,8 @@ const SurvivalAnalysis = () => {
   const [timeInterval, setTimeInterval] = useState(2)
   const handleSubmit = (userInput) => {
     console.log('user input', userInput)
+    setTimeInterval(userInput.timeInterval)
+
     fetchSurvivalResult(userInput).then((result) => {
       console.log('result', result)
       setSurvivalSeries(getSurvivalSeries(result.survival, userInput))
@@ -22,7 +24,11 @@ const SurvivalAnalysis = () => {
   return (
     <div className={styles.container}>
       <div className={styles.columnLeft}>
-        <ControlForm factors={factors} onSubmit={handleSubmit} />
+        <ControlForm
+          factors={factors}
+          onSubmit={handleSubmit}
+          timeInterval={timeInterval}
+        />
       </div>
       <div className={styles.columnRight}>
         <SurvivalPlot data={survivalSeries} />
