@@ -8,6 +8,7 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 import { getXAxisTicks } from './utils'
+import './RiskTable.css'
 
 const styles = {
   container: {
@@ -21,7 +22,10 @@ const RiskTable = ({ data, timeInterval }) => (
   <div style={styles.container}>
     <h1>risk table here</h1>
     {data.length > 0 && (
-      <ResponsiveContainer height={(data.length + 2) * 30}>
+      <ResponsiveContainer
+        className="risktable"
+        height={(data.length + 2) * 30}
+      >
         <ScatterChart margin={{ left: 20, bottom: 10, right: 20 }}>
           <XAxis
             dataKey="time"
