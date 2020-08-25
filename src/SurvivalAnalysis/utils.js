@@ -42,8 +42,8 @@ export const getSurvivalSeries = (survival, userInput) =>
         return { ...acc, [stratificationKey]: stratificationValue }
       }, {})
 
-export const getXAxisTicks = (survival, step = 2) => {
-  const times = survival.flatMap(({ data }) => data).map(({ time }) => time)
+export const getXAxisTicks = (data, step = 2) => {
+  const times = data.flatMap(({ data }) => data).map(({ time }) => time)
   const minTime = Math.floor(Math.min(...times))
   const maxTime = Math.floor(Math.max(...times)) + 1
 
