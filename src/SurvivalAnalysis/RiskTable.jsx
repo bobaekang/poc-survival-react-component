@@ -14,7 +14,6 @@ const isStratified = (data) => data[0].name.split(',').length > 1
 
 const RiskTable = ({ data, timeInterval }) => (
   <div className={styles.container}>
-    <h1>risk table here</h1>
     {data.length === 0 ? (
       <div className={styles.placeholder}>Rist table here</div>
     ) : (
