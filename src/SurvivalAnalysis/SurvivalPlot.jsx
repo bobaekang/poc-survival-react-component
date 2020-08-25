@@ -10,30 +10,7 @@ import {
 } from 'recharts'
 import { schemeCategory10 } from 'd3-scale-chromatic'
 import { getXAxisTicks } from './utils'
-
-const styles = {
-  container: {
-    minHeight: '300px',
-    padding: '.5rem',
-    textAlign: 'center',
-  },
-  placeholder: {
-    border: '1px dashed lightgray',
-    color: 'gray',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%',
-    width: '90%',
-    margin: 'auto',
-  },
-  plotContainer: {
-    display: 'flex',
-    height: '100%',
-    width: '75%',
-    margin: 'auto',
-  },
-}
+import styles from './SurvivalPlot.module.css'
 
 const Plot = ({ data, timeInterval }) => (
   <ResponsiveContainer height={300}>
@@ -73,10 +50,10 @@ const Plot = ({ data, timeInterval }) => (
 )
 
 const SurvivalPlot = ({ data, timeInterval }) => (
-  <div style={styles.container}>
+  <div className={styles.container}>
     {Array.isArray(data) ? (
       data.length === 0 ? (
-        <div style={styles.placeholder}>Survival plot here</div>
+        <div className={styles.placeholder}>Survival plot here</div>
       ) : (
         <Plot data={data} timeInterval={timeInterval} />
       )

@@ -1,0 +1,23 @@
+.container {
+  min-height: 300px;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.placeholder {
+  border: 1px dashed lightgray;
+  color: gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 90%;
+  margin: auto;
+}
+
+.plotContainer {
+  display: flex;
+  height: 100%;
+  width: 75%;
+  margin: auto;
+}
