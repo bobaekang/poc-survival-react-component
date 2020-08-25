@@ -7,3 +7,14 @@
 .risktable .yAxis tspan {
   font-size: 0.8rem;
 }
+
+.placeholder {
+  border: 1px dashed lightgray;
+  color: gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40%;
+  width: 90%;
+  margin: auto;
+}
