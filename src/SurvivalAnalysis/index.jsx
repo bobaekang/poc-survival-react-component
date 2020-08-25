@@ -31,7 +31,7 @@ const SurvivalAnalysis = () => {
         />
       </div>
       <div className={styles.columnRight}>
-        <SurvivalPlot data={survivalSeries} />
+        <SurvivalPlot data={survivalSeries} timeInterval={timeInterval} />
         <RiskTable />
       </div>
     </div>

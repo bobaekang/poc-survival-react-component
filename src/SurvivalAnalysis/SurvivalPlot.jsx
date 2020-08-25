@@ -25,7 +25,7 @@ const styles = {
   },
 }
 
-const Plot = ({ data }) => (
+const Plot = ({ data, timeInterval }) => (
   <ResponsiveContainer height={300}>
     <LineChart data={data} margin={{ left: 20, bottom: 10, right: 20 }}>
       <XAxis
@@ -36,7 +36,7 @@ const Plot = ({ data }) => (
           position: 'insideBottom',
           offset: -5,
         }}
-        ticks={getXAxisTicks(data)}
+        ticks={getXAxisTicks(data, timeInterval)}
       />
       <YAxis
         label={{
@@ -62,16 +62,16 @@ const Plot = ({ data }) => (
   </ResponsiveContainer>
 )
 
-const SurvivalPlot = ({ data }) => {
+const SurvivalPlot = ({ data, timeInterval }) => {
   return (
     <div style={styles.container}>
       <h1>survival plot here</h1>
       {Array.isArray(data)
-        ? data.length > 0 && <Plot data={data} />
+        ? data.length > 0 && <Plot data={data} timeInterval={timeInterval} />
         : Object.keys(data).map((key) => (
             <Fragment key={key}>
               <h2 style={{ fontSize: '1rem' }}>{key}</h2>
-              <Plot data={data[key]} />
+              <Plot data={data[key]} timeInterval={timeInterval} />
             </Fragment>
           ))}
     </div>
