@@ -134,8 +134,8 @@ const ControlForm = ({ factors, onSubmit, timeInterval }) => {
             <ControlFormInput
               label="EFS flag"
               type="checkbox"
-              onChange={(e) => setEfsFlag(Number.parseInt(e.target.value))}
-              value={efsFlag}
+              onChange={(e) => setEfsFlag(e.target.checked)}
+              checked={efsFlag}
             />
           </>
         )}
