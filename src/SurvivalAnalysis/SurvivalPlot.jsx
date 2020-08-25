@@ -17,6 +17,16 @@ const styles = {
     padding: '.5rem',
     textAlign: 'center',
   },
+  placeholder: {
+    border: '1px dashed lightgray',
+    color: 'gray',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '80%',
+    width: '90%',
+    margin: 'auto',
+  },
   plotContainer: {
     display: 'flex',
     height: '100%',
@@ -62,20 +72,24 @@ const Plot = ({ data, timeInterval }) => (
   </ResponsiveContainer>
 )
 
-const SurvivalPlot = ({ data, timeInterval }) => {
-  return (
-    <div style={styles.container}>
-      <h1>survival plot here</h1>
-      {Array.isArray(data)
-        ? data.length > 0 && <Plot data={data} timeInterval={timeInterval} />
-        : Object.keys(data).map((key) => (
-            <Fragment key={key}>
-              <h2 style={{ fontSize: '1rem' }}>{key}</h2>
-              <Plot data={data[key]} timeInterval={timeInterval} />
-            </Fragment>
-          ))}
-    </div>
-  )
-}
+const SurvivalPlot = ({ data, timeInterval }) => (
+  <div style={styles.container}>
+    <h1>survival plot here</h1>
+    {Array.isArray(data) ? (
+      data.length === 0 ? (
+        <div style={styles.placeholder}>Survival plot here</div>
+      ) : (
+        <Plot data={data} timeInterval={timeInterval} />
+      )
+    ) : (
+      Object.keys(data).map((key) => (
+        <Fragment key={key}>
+          <h2 style={{ fontSize: '1rem' }}>{key}</h2>
+          <Plot data={data[key]} timeInterval={timeInterval} />
+        </Fragment>
+      ))
+    )}
+  </div>
+)
 
 export default SurvivalPlot
