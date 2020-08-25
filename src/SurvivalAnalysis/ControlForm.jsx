@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const styles = {
   container: {
@@ -61,6 +61,13 @@ const ControlForm = ({ factors, onSubmit, timeInterval }) => {
   const [factorVariable, setFactorVariable] = useState('')
   const [stratificationVariable, setStratificationVariable] = useState('')
   const [localTimeInterval, setLocalTimeInterval] = useState(timeInterval)
+  useEffect(() => {
+    onSubmit({
+      factorVariable,
+      stratificationVariable,
+      timeInterval: localTimeInterval,
+    })
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div style={styles.container}>
