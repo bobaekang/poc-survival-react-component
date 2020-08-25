@@ -40,6 +40,7 @@ const RiskTable = ({ data, timeInterval }) => (
                 offset: -5,
               }}
               ticks={getXAxisTicks(data, timeInterval)}
+              domain={['dataMin', 'dataMax']}
             />
             <YAxis
               dataKey="name"

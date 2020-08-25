@@ -24,6 +24,7 @@ const Plot = ({ data, timeInterval }) => (
           offset: -5,
         }}
         ticks={getXAxisTicks(data, timeInterval)}
+        domain={['dataMin', 'auto']}
       />
       <YAxis
         label={{
