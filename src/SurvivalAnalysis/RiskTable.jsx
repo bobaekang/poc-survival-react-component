@@ -8,24 +8,16 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 import { getXAxisTicks } from './utils'
-import './RiskTable.css'
-
-const styles = {
-  container: {
-    minHeight: '150px',
-    padding: '.5rem',
-    textAlign: 'center',
-  },
-}
+import styles from './RiskTable.module.css'
 
 const isStratified = (data) => data[0].name.split(',').length > 1
 
 const RiskTable = ({ data, timeInterval }) => (
-  <div style={styles.container}>
+  <div className={styles.container}>
     <h1>risk table here</h1>
     {data.length > 0 && (
       <ResponsiveContainer
-        className="risktable"
+        className={styles.risktable}
         height={(data.length + 2) * 30}
       >
         <ScatterChart
