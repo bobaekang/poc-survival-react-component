@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { isUsingPocMicroservice } from './utils'
 
 const styles = {
   container: {
@@ -56,10 +57,6 @@ const ControlFormInput = ({ label, ...inputAttrs }) => (
     input={<input style={styles.field} {...inputAttrs} />}
   />
 )
-
-const isUsingPocMicroservice =
-  process.env.REACT_APP_POC_MICROSERVICE_URL &&
-  process.env.REACT_APP_POC_MICROSERVICE_URL !== ''
 
 const ControlForm = ({ factors, onSubmit, timeInterval }) => {
   const [factorVariable, setFactorVariable] = useState('')

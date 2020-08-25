@@ -1,5 +1,9 @@
 import { result } from '../mockData'
 
+export const isUsingPocMicroservice =
+  process.env.REACT_APP_POC_MICROSERVICE_URL &&
+  process.env.REACT_APP_POC_MICROSERVICE_URL !== ''
+
 export const fetchSurvivalResult = ({
   factorVariable,
   stratificationVariable,
