@@ -23,7 +23,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '80%',
+    height: '100%',
     width: '90%',
     margin: 'auto',
   },
@@ -74,7 +74,6 @@ const Plot = ({ data, timeInterval }) => (
 
 const SurvivalPlot = ({ data, timeInterval }) => (
   <div style={styles.container}>
-    <h1>survival plot here</h1>
     {Array.isArray(data) ? (
       data.length === 0 ? (
         <div style={styles.placeholder}>Survival plot here</div>
