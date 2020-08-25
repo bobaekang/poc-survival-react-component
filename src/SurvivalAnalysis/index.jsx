@@ -11,11 +11,9 @@ const SurvivalAnalysis = () => {
   const [risktable, setRisktable] = useState([])
   const [timeInterval, setTimeInterval] = useState(2)
   const handleSubmit = (userInput) => {
-    console.log('user input', userInput)
     setTimeInterval(userInput.timeInterval)
 
     fetchSurvivalResult(userInput).then((result) => {
-      console.log('result', result)
       setSurvivalSeries(getSurvivalSeries(result.survival, userInput))
       setRisktable(result.risktable)
     })
