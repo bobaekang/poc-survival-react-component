@@ -61,6 +61,10 @@ const ControlForm = ({ factors, onSubmit, timeInterval }) => {
   const [factorVariable, setFactorVariable] = useState('')
   const [stratificationVariable, setStratificationVariable] = useState('')
   const [localTimeInterval, setLocalTimeInterval] = useState(timeInterval)
+  const [startTime, setStartTime] = useState(0)
+  const [endTime, setEndTime] = useState(10)
+  const [efsFlag, setEfsFlag] = useState(false)
+
   useEffect(() => {
     onSubmit({
       factorVariable,
@@ -105,6 +109,31 @@ const ControlForm = ({ factors, onSubmit, timeInterval }) => {
           }
           value={localTimeInterval}
         />
+        <ControlFormInput
+          label="Start time"
+          type="number"
+          min={0}
+          max={endTime - 1}
+          step={1}
+          onChange={(e) => setStartTime(Number.parseInt(e.target.value))}
+          value={startTime}
+        />
+        <ControlFormInput
+          label="End time"
+          type="number"
+          min={startTime + 1}
+          max={99}
+          step={1}
+          onChange={(e) => setEndTime(Number.parseInt(e.target.value))}
+          value={endTime}
+        />
+        <ControlFormInput
+          label="EFS flag"
+          type="checkbox"
+          onChange={(e) => setEfsFlag(Number.parseInt(e.target.value))}
+          value={efsFlag}
+        />
+
         <button
           onClick={(e) => {
             e.preventDefault()
