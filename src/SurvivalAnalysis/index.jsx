@@ -6,14 +6,14 @@ import { factors } from '../mockData'
 import { fetchSurvivalResult, getSurvivalSeries } from './utils'
 import styles from './SurvivalAnalysis.module.css'
 
-const SurvivalAnalysis = () => {
+const SurvivalAnalysis = ({ isUsingPocMicroservice }) => {
   const [survivalSeries, setSurvivalSeries] = useState([])
   const [risktable, setRisktable] = useState([])
   const [timeInterval, setTimeInterval] = useState(2)
   const handleSubmit = (userInput) => {
     setTimeInterval(userInput.timeInterval)
 
-    fetchSurvivalResult(userInput).then((result) => {
+    fetchSurvivalResult(isUsingPocMicroservice)(userInput).then((result) => {
       setSurvivalSeries(getSurvivalSeries(result.survival, userInput))
       setRisktable(result.risktable)
     })
@@ -26,6 +26,7 @@ const SurvivalAnalysis = () => {
           factors={factors}
           onSubmit={handleSubmit}
           timeInterval={timeInterval}
+          isUsingPocMicroservice={isUsingPocMicroservice}
         />
       </div>
       <div className={styles.columnRight}>

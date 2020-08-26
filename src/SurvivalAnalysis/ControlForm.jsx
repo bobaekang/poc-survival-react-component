@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { isUsingPocMicroservice } from './utils'
 
 const styles = {
   container: {
@@ -58,7 +57,12 @@ const ControlFormInput = ({ label, ...inputAttrs }) => (
   />
 )
 
-const ControlForm = ({ factors, onSubmit, timeInterval }) => {
+const ControlForm = ({
+  factors,
+  onSubmit,
+  timeInterval,
+  isUsingPocMicroservice,
+}) => {
   const [factorVariable, setFactorVariable] = useState('')
   const [stratificationVariable, setStratificationVariable] = useState('')
   const [localTimeInterval, setLocalTimeInterval] = useState(timeInterval)
@@ -73,7 +77,7 @@ const ControlForm = ({ factors, onSubmit, timeInterval }) => {
       timeInterval: localTimeInterval,
       ...(isUsingPocMicroservice ? { startTime, endTime, efsFlag } : {}),
     })
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [isUsingPocMicroservice]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div style={styles.container}>

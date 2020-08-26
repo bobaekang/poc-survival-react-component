@@ -1,9 +1,5 @@
 import { result } from '../mockData'
 
-export const isUsingPocMicroservice =
-  process.env.REACT_APP_POC_MICROSERVICE_URL &&
-  process.env.REACT_APP_POC_MICROSERVICE_URL !== ''
-
 const fetchMockSurvivalResult = ({ factorVariable, stratificationVariable }) =>
   Promise.resolve(
     result[
@@ -26,9 +22,8 @@ const fetchPocSurvivalResult = ({ timeInterval, ...userInput }) =>
     body: JSON.stringify(userInput),
   }).then((response) => response.json())
 
-export const fetchSurvivalResult = isUsingPocMicroservice
-  ? fetchPocSurvivalResult
-  : fetchMockSurvivalResult
+export const fetchSurvivalResult = (isUsingPocMicroservice) =>
+  isUsingPocMicroservice ? fetchPocSurvivalResult : fetchMockSurvivalResult
 
 export const getSurvivalSeries = (survival, userInput) =>
   userInput.factorVariable === '' || userInput.stratificationVariable === ''
