@@ -9,6 +9,7 @@ import styles from './SurvivalAnalysis.module.css'
 const SurvivalAnalysis = ({ isUsingPocMicroservice }) => {
   const [survivalSeries, setSurvivalSeries] = useState([])
   const [risktable, setRisktable] = useState([])
+  const [pval, setPval] = useState()
   const [timeInterval, setTimeInterval] = useState(2)
   const handleSubmit = (userInput) => {
     setTimeInterval(userInput.timeInterval)
@@ -16,6 +17,7 @@ const SurvivalAnalysis = ({ isUsingPocMicroservice }) => {
     fetchSurvivalResult(isUsingPocMicroservice)(userInput).then((result) => {
       setSurvivalSeries(getSurvivalSeries(result.survival, userInput))
       setRisktable(result.risktable)
+      setPval(result.pval)
     })
   }
 
@@ -30,6 +32,9 @@ const SurvivalAnalysis = ({ isUsingPocMicroservice }) => {
         />
       </div>
       <div className={styles.columnRight}>
+        <div className={styles.pval}>
+          {pval && `Log-rank test p-value: ${+parseFloat(pval).toFixed(4)}`}
+        </div>
         <SurvivalPlot data={survivalSeries} timeInterval={timeInterval} />
         <RiskTable data={risktable} timeInterval={timeInterval} />
       </div>

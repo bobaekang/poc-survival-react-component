@@ -23,6 +23,12 @@
   width: 100%;
 }
 
+.pval {
+  margin-left: 1rem;
+  padding: 0.5rem;
+  height: 1rem;
+}
+
 @media (min-width: 768px) {
   .columnLeft {
     width: 35%;
