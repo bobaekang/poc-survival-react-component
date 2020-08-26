@@ -25,6 +25,12 @@ const styles = {
   field: {
     width: '100%',
   },
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    margin: '1rem auto',
+    maxWidth: '10rem',
+  },
 }
 
 const ControlFormField = ({ label, input }) => (
@@ -143,22 +149,36 @@ const ControlForm = ({
             />
           </>
         )}
-
-        <button
-          onClick={(e) => {
-            e.preventDefault()
-            onSubmit({
-              factorVariable,
-              stratificationVariable,
-              timeInterval: localTimeInterval,
-              ...(isUsingPocMicroservice
-                ? { startTime, endTime, efsFlag }
-                : {}),
-            })
-          }}
-        >
-          Apply
-        </button>
+        <div style={styles.buttonContainer}>
+          <button
+            onClick={(e) => {
+              e.preventDefault()
+              onSubmit({
+                factorVariable,
+                stratificationVariable,
+                timeInterval: localTimeInterval,
+                ...(isUsingPocMicroservice
+                  ? { startTime, endTime, efsFlag }
+                  : {}),
+              })
+            }}
+          >
+            Apply
+          </button>
+          <button
+            onClick={(e) => {
+              e.preventDefault()
+              setFactorVariable('')
+              setStratificationVariable('')
+              setLocalTimeInterval(2)
+              setStartTime(0)
+              setEndTime(20)
+              setEfsFlag(false)
+            }}
+          >
+            Reset
+          </button>
+        </div>
       </form>
     </div>
   )
