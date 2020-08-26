@@ -124,7 +124,7 @@ const ControlForm = ({
         {isUsingPocMicroservice && (
           <>
             <ControlFormInput
-              label="Start time"
+              label="Start time (year)"
               type="number"
               min={0}
               max={endTime - 1}
@@ -133,7 +133,7 @@ const ControlForm = ({
               value={startTime}
             />
             <ControlFormInput
-              label="End time"
+              label="End time (year)"
               type="number"
               min={startTime + 1}
               max={99}
