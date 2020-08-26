@@ -40,12 +40,19 @@ const ControlFormField = ({ label, input }) => (
   </div>
 )
 
-const ControlFormSelect = ({ label, options, ...selectAttrs }) => (
+const ControlFormSelect = ({
+  label,
+  options,
+  hideDefaultOption,
+  ...selectAttrs
+}) => (
   <ControlFormField
     label={label}
     input={
       <select style={styles.field} {...selectAttrs}>
-        <option value="">--Please choose an option--</option>
+        {hideDefaultOption || (
+          <option value="">--Please choose an option--</option>
+        )}
         {options.map(({ label, value }) => (
           <option key={value} value={value}>
             {label}
@@ -149,6 +156,7 @@ const ControlForm = ({
                 { label: 'All Survival', value: 'all' },
                 { label: 'Event-Free Survival (EFS)', value: 'efs' },
               ]}
+              hideDefaultOption
               onChange={(e) => setSurvivalType(e.target.value)}
               value={survivalType}
             />
