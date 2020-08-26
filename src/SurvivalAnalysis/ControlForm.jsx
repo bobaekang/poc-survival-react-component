@@ -74,14 +74,16 @@ const ControlForm = ({
   const [localTimeInterval, setLocalTimeInterval] = useState(timeInterval)
   const [startTime, setStartTime] = useState(0)
   const [endTime, setEndTime] = useState(20)
-  const [efsFlag, setEfsFlag] = useState(false)
+  const [survivalType, setSurvivalType] = useState('all')
 
   useEffect(() => {
     onSubmit({
       factorVariable,
       stratificationVariable,
       timeInterval: localTimeInterval,
-      ...(isUsingPocMicroservice ? { startTime, endTime, efsFlag } : {}),
+      ...(isUsingPocMicroservice
+        ? { startTime, endTime, efsFlag: survivalType === 'efs' }
+        : {}),
     })
   }, [isUsingPocMicroservice]) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -141,11 +143,14 @@ const ControlForm = ({
               onChange={(e) => setEndTime(Number.parseInt(e.target.value))}
               value={endTime}
             />
-            <ControlFormInput
-              label="EFS flag"
-              type="checkbox"
-              onChange={(e) => setEfsFlag(e.target.checked)}
-              checked={efsFlag}
+            <ControlFormSelect
+              label="Survival type"
+              options={[
+                { label: 'All Survival', value: 'all' },
+                { label: 'Event-Free Survival (EFS)', value: 'efs' },
+              ]}
+              onChange={(e) => setSurvivalType(e.target.value)}
+              value={survivalType}
             />
           </>
         )}
@@ -158,7 +163,7 @@ const ControlForm = ({
                 stratificationVariable,
                 timeInterval: localTimeInterval,
                 ...(isUsingPocMicroservice
-                  ? { startTime, endTime, efsFlag }
+                  ? { startTime, endTime, efsFlag: survivalType === 'efs' }
                   : {}),
               })
             }}
@@ -173,7 +178,7 @@ const ControlForm = ({
               setLocalTimeInterval(2)
               setStartTime(0)
               setEndTime(20)
-              setEfsFlag(false)
+              setSurvivalType('all')
             }}
           >
             Reset
