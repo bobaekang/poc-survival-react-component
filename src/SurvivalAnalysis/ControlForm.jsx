@@ -51,7 +51,7 @@ const ControlForm = ({
   const [endTime, setEndTime] = useState(20)
   const [survivalType, setSurvivalType] = useState('all')
 
-  useEffect(() => {
+  const submitUserInput = () =>
     onSubmit({
       factorVariable,
       stratificationVariable,
@@ -60,6 +60,9 @@ const ControlForm = ({
         ? { startTime, endTime, efsFlag: survivalType === 'efs' }
         : {}),
     })
+
+  useEffect(() => {
+    submitUserInput()
   }, [isUsingPocMicroservice]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -134,14 +137,7 @@ const ControlForm = ({
           <button
             onClick={(e) => {
               e.preventDefault()
-              onSubmit({
-                factorVariable,
-                stratificationVariable,
-                timeInterval: localTimeInterval,
-                ...(isUsingPocMicroservice
-                  ? { startTime, endTime, efsFlag: survivalType === 'efs' }
-                  : {}),
-              })
+              submitUserInput()
             }}
           >
             Apply
