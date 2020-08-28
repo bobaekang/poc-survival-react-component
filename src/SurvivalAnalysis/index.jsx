@@ -17,7 +17,7 @@ const SurvivalAnalysis = ({ isUsingPocMicroservice }) => {
     fetchSurvivalResult(isUsingPocMicroservice)(userInput).then((result) => {
       setSurvivalSeries(getSurvivalSeries(result.survival, userInput))
       setRisktable(result.risktable)
-      setPval(result.pval)
+      setPval(result.pval && +parseFloat(result.pval).toFixed(4))
     })
   }
 
@@ -33,7 +33,7 @@ const SurvivalAnalysis = ({ isUsingPocMicroservice }) => {
       </div>
       <div className={styles.columnRight}>
         <div className={styles.pval}>
-          {pval && `Log-rank test p-value: ${+parseFloat(pval).toFixed(4)}`}
+          {pval && `Log-rank test p-value: ${pval}`}
         </div>
         <SurvivalPlot data={survivalSeries} timeInterval={timeInterval} />
         <RiskTable data={risktable} timeInterval={timeInterval} />
