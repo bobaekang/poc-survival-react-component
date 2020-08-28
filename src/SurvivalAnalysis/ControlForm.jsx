@@ -60,10 +60,18 @@ const ControlForm = ({
         ? { startTime, endTime, efsFlag: survivalType === 'efs' }
         : {}),
     })
-
   useEffect(() => {
     submitUserInput()
   }, [isUsingPocMicroservice]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  const resetUserInput = () => {
+    setFactorVariable('')
+    setStratificationVariable('')
+    setLocalTimeInterval(2)
+    setStartTime(0)
+    setEndTime(20)
+    setSurvivalType('all')
+  }
 
   return (
     <div className={styles.container}>
@@ -145,12 +153,7 @@ const ControlForm = ({
           <button
             onClick={(e) => {
               e.preventDefault()
-              setFactorVariable('')
-              setStratificationVariable('')
-              setLocalTimeInterval(2)
-              setStartTime(0)
-              setEndTime(20)
-              setSurvivalType('all')
+              resetUserInput()
             }}
           >
             Reset
