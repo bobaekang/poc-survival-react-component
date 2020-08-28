@@ -1,42 +1,10 @@
 import React, { useState, useEffect } from 'react'
-
-const styles = {
-  container: {
-    padding: '.5rem',
-    textAlign: 'center',
-    width: '100%',
-  },
-  inputContainer: {
-    container: {
-      display: 'flex',
-      alignItems: 'center',
-      flexWrap: 'wrap',
-      justifyContent: 'center',
-      margin: '.5rem',
-    },
-    label: {
-      margin: '.5rem',
-    },
-    input: {
-      margin: '.5rem',
-      minWidth: '200px',
-    },
-  },
-  field: {
-    width: '100%',
-  },
-  buttonContainer: {
-    display: 'flex',
-    justifyContent: 'space-around',
-    margin: '1rem auto',
-    maxWidth: '10rem',
-  },
-}
+import styles from './ControlForm.module.css'
 
 const ControlFormField = ({ label, input }) => (
-  <div style={styles.inputContainer.container}>
-    <label style={styles.inputContainer.label}>{label}</label>
-    <div style={styles.inputContainer.input}>{input}</div>
+  <div className={styles.fieldContainer}>
+    <label className={styles.fieldLabel}>{label}</label>
+    <div className={styles.fieldInput}>{input}</div>
   </div>
 )
 
@@ -49,7 +17,7 @@ const ControlFormSelect = ({
   <ControlFormField
     label={label}
     input={
-      <select style={styles.field} {...selectAttrs}>
+      <select className={styles.input} {...selectAttrs}>
         {hideDefaultOption || (
           <option value="">--Please choose an option--</option>
         )}
@@ -66,7 +34,7 @@ const ControlFormSelect = ({
 const ControlFormInput = ({ label, ...inputAttrs }) => (
   <ControlFormField
     label={label}
-    input={<input style={styles.field} {...inputAttrs} />}
+    input={<input className={styles.input} {...inputAttrs} />}
   />
 )
 
@@ -95,7 +63,7 @@ const ControlForm = ({
   }, [isUsingPocMicroservice]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div style={styles.container}>
+    <div className={styles.container}>
       <h1>Select variables</h1>
       <form>
         <ControlFormSelect
@@ -162,7 +130,7 @@ const ControlForm = ({
             />
           </>
         )}
-        <div style={styles.buttonContainer}>
+        <div className={styles.buttonContainer}>
           <button
             onClick={(e) => {
               e.preventDefault()

@@ -1,0 +1,33 @@
+.container {
+  padding: 0.5rem;
+  text-align: center;
+  width: 100%;
+}
+
+.fieldContainer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0.5rem;
+}
+
+.fieldLabel {
+  margin: 0.5rem;
+}
+
+.fieldInput {
+  margin: 0.5rem;
+  min-width: 200px;
+}
+
+.input {
+  width: 100%;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem auto;
+  max-width: 10rem;
+}
