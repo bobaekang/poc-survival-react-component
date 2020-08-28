@@ -15,10 +15,21 @@ export const factors = [
   },
 ]
 
-export const result = {
+const result = {
   all: resultAll,
   race: resultRace,
   sex: resultSex,
   race_sex: resultRaceSex,
   sex_race: resultSexRace,
 }
+
+export const fetchResult = ({ factorVariable, stratificationVariable }) =>
+  Promise.resolve(
+    result[
+      factorVariable
+        ? stratificationVariable
+          ? `${factorVariable}_${stratificationVariable}`.toLowerCase()
+          : factorVariable.toLowerCase()
+        : 'all'
+    ]
+  )

@@ -1,15 +1,4 @@
-import { result } from '../mockData'
-
-const fetchMockSurvivalResult = ({ factorVariable, stratificationVariable }) =>
-  Promise.resolve(
-    result[
-      factorVariable
-        ? stratificationVariable
-          ? `${factorVariable}_${stratificationVariable}`.toLowerCase()
-          : factorVariable.toLowerCase()
-        : 'all'
-    ]
-  )
+import { fetchResult as fetchMockSurvivalResult } from '../mockData'
 
 const fetchPocSurvivalResult = ({ timeInterval, ...userInput }) =>
   fetch(process.env.REACT_APP_POC_MICROSERVICE_URL, {
