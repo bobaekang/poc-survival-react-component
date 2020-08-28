@@ -15,8 +15,6 @@ export const factors = [
   },
 ]
 
-export const filter = {}
-
 export const result = {
   all: resultAll,
   race: resultRace,
