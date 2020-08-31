@@ -50,19 +50,26 @@ const Plot = ({ data, timeInterval }) => (
   </ResponsiveContainer>
 )
 
-const SurvivalPlot = ({ data, timeInterval }) => (
+const SurvivalPlot = ({ data, stratificationVariable, timeInterval }) => (
   <div className={styles.container}>
-    {Array.isArray(data) ? (
-      data.length === 0 ? (
-        <div className={styles.placeholder}>Survival plot here</div>
-      ) : (
-        <Plot data={data} timeInterval={timeInterval} />
-      )
+    {data.length === 0 ? (
+      <div className={styles.placeholder}>Survival plot here</div>
+    ) : stratificationVariable === '' ? (
+      <Plot data={data} timeInterval={timeInterval} />
     ) : (
-      Object.keys(data).map((key) => (
+      Object.entries(
+        data.reduce((acc, { name, data }) => {
+          const [factorKey, stratificationKey] = name.split(',')
+          const stratificationValue = acc.hasOwnProperty(stratificationKey)
+            ? [...acc[stratificationKey], { name: factorKey, data }]
+            : [{ name: factorKey, data }]
+
+          return { ...acc, [stratificationKey]: stratificationValue }
+        }, {})
+      ).map(([key, data]) => (
         <Fragment key={key}>
           <h2 style={{ fontSize: '1rem' }}>{key}</h2>
-          <Plot data={data[key]} timeInterval={timeInterval} />
+          <Plot data={data} timeInterval={timeInterval} />
         </Fragment>
       ))
     )}
