@@ -51,6 +51,14 @@ const ControlForm = ({
   const [endTime, setEndTime] = useState(20)
   const [survivalType, setSurvivalType] = useState('all')
 
+  const validateNumberInput = (e) => {
+    const value = Number.parseInt(e.target.value)
+    const min = Number.parseInt(e.target.min)
+    const max = Number.parseInt(e.target.max)
+    if (min && min > value) setLocalTimeInterval(min)
+    else if (max && max < value) setLocalTimeInterval(max)
+  }
+
   const submitUserInput = () =>
     onSubmit({
       factorVariable,
@@ -104,6 +112,7 @@ const ControlForm = ({
           min={1}
           max={5}
           step={1}
+          onBlur={validateNumberInput}
           onChange={(e) =>
             setLocalTimeInterval(Number.parseInt(e.target.value))
           }
@@ -117,6 +126,7 @@ const ControlForm = ({
               min={0}
               max={endTime - 1}
               step={1}
+              onBlur={validateNumberInput}
               onChange={(e) => setStartTime(Number.parseInt(e.target.value))}
               value={startTime}
             />
@@ -126,6 +136,7 @@ const ControlForm = ({
               min={startTime + 1}
               max={99}
               step={1}
+              onBlur={validateNumberInput}
               onChange={(e) => setEndTime(Number.parseInt(e.target.value))}
               value={endTime}
             />
