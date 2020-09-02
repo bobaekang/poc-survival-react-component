@@ -5,13 +5,21 @@ import SurvivalPlot from './SurvivalPlot'
 import { factors } from '../mockData'
 import { fetchSurvivalResult } from './utils'
 import styles from './SurvivalAnalysis.module.css'
+import './typedef'
 
+/**
+ * @param {Object} prop
+ * @param {boolean} prop.isUsingPocMicroservice
+ */
 const SurvivalAnalysis = ({ isUsingPocMicroservice }) => {
   const [pval, setPval] = useState()
   const [risktable, setRisktable] = useState([])
   const [survival, setSurvival] = useState([])
   const [stratificationVariable, setStratificationVariable] = useState('')
   const [timeInterval, setTimeInterval] = useState(2)
+  /**
+   * @type {UserInputSubmitHandler}
+   */
   const handleSubmit = (userInput) => {
     setStratificationVariable(userInput.stratificationVariable)
     setTimeInterval(userInput.timeInterval)

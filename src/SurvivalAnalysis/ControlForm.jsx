@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import styles from './ControlForm.module.css'
+import './typedef'
 
+/**
+ * @param {Object} prop
+ * @param {string} prop.label
+ * @param {JSX.Element} prop.input
+ */
 const ControlFormField = ({ label, input }) => (
   <div className={styles.fieldContainer}>
     <label className={styles.fieldLabel}>{label}</label>
@@ -38,6 +44,13 @@ const ControlFormInput = ({ label, ...inputAttrs }) => (
   />
 )
 
+/**
+ * @param {Object} prop
+ * @param {string[]} prop.factors
+ * @param {UserInputSubmitHandler} prop.onSubmit
+ * @param {number} prop.timeInterval
+ * @param {boolean} prop.isUsingPocMicroservice
+ */
 const ControlForm = ({
   factors,
   onSubmit,
@@ -51,6 +64,9 @@ const ControlForm = ({
   const [endTime, setEndTime] = useState(20)
   const [survivalType, setSurvivalType] = useState('all')
 
+  /**
+   * @param {{ target: { value: string, min: string, max: string }}} e
+   */
   const validateNumberInput = (e) => {
     const value = Number.parseInt(e.target.value)
     const min = Number.parseInt(e.target.min)
