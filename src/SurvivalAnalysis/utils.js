@@ -20,7 +20,12 @@ const fetchPocSurvivalResult = ({
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(requestBody),
-      }).then((response) => response.json())
+      })
+        .then((response) => {
+          if (!response.ok) throw Error(`HTTP status: ${response.status}`)
+          return response.json()
+        })
+        .catch((e) => console.error(e))
 
 /**
  * @param {boolean} isUsingPocMicroservice
