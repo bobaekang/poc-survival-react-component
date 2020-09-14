@@ -11,7 +11,8 @@ import './typedef'
  * @param {Object} prop
  * @param {boolean} prop.isUsingPocMicroservice
  */
-const SurvivalAnalysis = ({ isUsingPocMicroservice }) => {
+const SurvivalAnalysis = ({ isUsingPocMicroservice, isTestingError }) => {
+  const [isError, setIsError] = useState(false)
   const [pval, setPval] = useState()
   const [risktable, setRisktable] = useState([])
   const [survival, setSurvival] = useState([])
@@ -24,11 +25,20 @@ const SurvivalAnalysis = ({ isUsingPocMicroservice }) => {
     setStratificationVariable(userInput.stratificationVariable)
     setTimeInterval(userInput.timeInterval)
 
-    fetchSurvivalResult(isUsingPocMicroservice)(userInput).then((result) => {
-      setPval(result.pval && +parseFloat(result.pval).toFixed(4))
-      setRisktable(result.risktable)
-      setSurvival(result.survival)
+    fetchSurvivalResult(isUsingPocMicroservice)({
+      isTestingError,
+      ...userInput,
     })
+      .then((result) => {
+        setIsError(false)
+        setPval(result.pval && +parseFloat(result.pval).toFixed(4))
+        setRisktable(result.risktable)
+        setSurvival(result.survival)
+      })
+      .catch((e) => {
+        console.error(e)
+        setIsError(true)
+      })
   }
 
   return (
@@ -42,15 +52,26 @@ const SurvivalAnalysis = ({ isUsingPocMicroservice }) => {
         />
       </div>
       <div className={styles.columnRight}>
-        <div className={styles.pval}>
-          {pval && `Log-rank test p-value: ${pval}`}
-        </div>
-        <SurvivalPlot
-          data={survival}
-          stratificationVariable={stratificationVariable}
-          timeInterval={timeInterval}
-        />
-        <RiskTable data={risktable} timeInterval={timeInterval} />
+        {isError ? (
+          <div style={{ color: 'red', margin: 'auto' }}>
+            <p>
+              Something went wrong! Please retry by clicking "Apply" button.
+            </p>
+            <p>If the problem persists, try refreshing the page.</p>
+          </div>
+        ) : (
+          <>
+            <div className={styles.pval}>
+              {pval && `Log-rank test p-value: ${pval}`}
+            </div>
+            <SurvivalPlot
+              data={survival}
+              stratificationVariable={stratificationVariable}
+              timeInterval={timeInterval}
+            />
+            <RiskTable data={risktable} timeInterval={timeInterval} />
+          </>
+        )}
       </div>
     </div>
   )

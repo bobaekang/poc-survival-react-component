@@ -23,13 +23,19 @@ const result = {
   sex_race: resultSexRace,
 }
 
-export const fetchResult = ({ factorVariable, stratificationVariable }) =>
-  Promise.resolve(
-    result[
-      factorVariable
-        ? stratificationVariable
-          ? `${factorVariable}_${stratificationVariable}`.toLowerCase()
-          : factorVariable.toLowerCase()
-        : 'all'
-    ]
-  )
+export const fetchResult = ({
+  isTestingError,
+  factorVariable,
+  stratificationVariable,
+}) =>
+  isTestingError
+    ? Promise.reject('Test error handling.')
+    : Promise.resolve(
+        result[
+          factorVariable
+            ? stratificationVariable
+              ? `${factorVariable}_${stratificationVariable}`.toLowerCase()
+              : factorVariable.toLowerCase()
+            : 'all'
+        ]
+      )

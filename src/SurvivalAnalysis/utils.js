@@ -5,16 +5,22 @@ import './typedef'
  * Fetch survival result data from proof-of-concept service
  * @param {UserInput} userInput
  */
-const fetchPocSurvivalResult = ({ timeInterval, ...requestBody }) =>
-  fetch(process.env.REACT_APP_POC_MICROSERVICE_URL, {
-    method: 'POST',
-    mode: 'cors',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(requestBody),
-  }).then((response) => response.json())
+const fetchPocSurvivalResult = ({
+  isTestingError,
+  timeInterval,
+  ...requestBody
+}) =>
+  isTestingError
+    ? Promise.reject('Test error handling.')
+    : fetch(process.env.REACT_APP_POC_MICROSERVICE_URL, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      }).then((response) => response.json())
 
 /**
  * @param {boolean} isUsingPocMicroservice
