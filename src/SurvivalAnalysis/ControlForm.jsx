@@ -64,6 +64,18 @@ const ControlForm = ({
   const [endTime, setEndTime] = useState(20)
   const [survivalType, setSurvivalType] = useState('all')
 
+  const [isInputChanged, setIsInputChanged] = useState(false)
+  useEffect(() => {
+    setIsInputChanged(true)
+  }, [
+    factorVariable,
+    stratificationVariable,
+    localTimeInterval,
+    startTime,
+    endTime,
+    survivalType,
+  ])
+
   /**
    * @param {{ target: { value: string, min: string, max: string }}} e
    */
@@ -173,7 +185,9 @@ const ControlForm = ({
             onClick={(e) => {
               e.preventDefault()
               submitUserInput()
+              setIsInputChanged(false)
             }}
+            disabled={!isInputChanged}
           >
             Apply
           </button>
