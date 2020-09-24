@@ -48,6 +48,7 @@ const SurvivalAnalysis = ({ isUsingPocMicroservice, isTestingError }) => {
           factors={factors}
           onSubmit={handleSubmit}
           timeInterval={timeInterval}
+          isError={isError}
           isUsingPocMicroservice={isUsingPocMicroservice}
         />
       </div>

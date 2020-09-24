@@ -49,12 +49,14 @@ const ControlFormInput = ({ label, ...inputAttrs }) => (
  * @param {string[]} prop.factors
  * @param {UserInputSubmitHandler} prop.onSubmit
  * @param {number} prop.timeInterval
+ * @param {boolean} prop.isError
  * @param {boolean} prop.isUsingPocMicroservice
  */
 const ControlForm = ({
   factors,
   onSubmit,
   timeInterval,
+  isError,
   isUsingPocMicroservice,
 }) => {
   const [factorVariable, setFactorVariable] = useState('')
@@ -75,6 +77,9 @@ const ControlForm = ({
     endTime,
     survivalType,
   ])
+  useEffect(() => {
+    if (!isInputChanged && isError) setIsInputChanged(true)
+  }, [isInputChanged, isError])
 
   /**
    * @param {{ target: { value: string, min: string, max: string }}} e
