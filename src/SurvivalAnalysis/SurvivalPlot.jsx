@@ -86,14 +86,14 @@ const Plot = ({ data, timeInterval }) => {
 /**
  * @param {Object} prop
  * @param {SurvivalData[]} prop.data
- * @param {string} prop.stratificationVariable
+ * @param {boolean} prop.isStratified
  * @param {number} prop.timeInterval
  */
-const SurvivalPlot = ({ data, stratificationVariable, timeInterval }) => (
+const SurvivalPlot = ({ data, isStratified, timeInterval }) => (
   <div className={styles.container}>
     {data.length === 0 ? (
       <div className={styles.placeholder}>Survival plot here</div>
-    ) : stratificationVariable === '' ? (
+    ) : isStratified ? (
       <Plot data={data} timeInterval={timeInterval} />
     ) : (
       Object.entries(
