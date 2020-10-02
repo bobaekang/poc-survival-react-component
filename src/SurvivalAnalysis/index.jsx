@@ -70,7 +70,11 @@ const SurvivalAnalysis = ({ isUsingPocMicroservice, isTestingError }) => {
               stratificationVariable={stratificationVariable}
               timeInterval={timeInterval}
             />
-            <RiskTable data={risktable} timeInterval={timeInterval} />
+            <RiskTable
+              data={risktable}
+              stratificationVariable={stratificationVariable}
+              timeInterval={timeInterval}
+            />
           </>
         )}
       </div>

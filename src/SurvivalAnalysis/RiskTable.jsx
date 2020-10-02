@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import {
   ScatterChart,
   Scatter,
@@ -11,11 +11,6 @@ import { getXAxisTicks } from './utils'
 import styles from './RiskTable.module.css'
 import './RiskTable.css'
 import './typedef'
-
-/**
- * @param {RisktableData[]} data
- */
-const isStratified = (data) => data[0].name.split(',').length > 1
 
 /**
  * @param {RisktableData[]} data
@@ -39,52 +34,82 @@ const getMaxTime = (data) =>
  * @param {RisktableData[]} prop.data
  * @param {number} prop.timeInterval
  */
-const RiskTable = ({ data, timeInterval }) => (
+const Table = ({ data, isLast, timeInterval }) => (
+  <ResponsiveContainer
+    className="risktable"
+    height={(data.length + (isLast ? 2 : 0.5)) * 30}
+  >
+    <ScatterChart
+      margin={{
+        bottom: isLast ? 10 : 0,
+        left: 20,
+        right: 20,
+      }}
+    >
+      <XAxis
+        dataKey="time"
+        type="number"
+        domain={['dataMin', getMaxTime(data)]}
+        hide={!isLast}
+        label={
+          isLast
+            ? { value: 'Time (in year)', position: 'insideBottom', offset: -5 }
+            : {}
+        }
+        ticks={getXAxisTicks(data, timeInterval)}
+      />
+      <YAxis
+        dataKey="name"
+        type="category"
+        allowDuplicatedCategory={false}
+        axisLine={false}
+        reversed
+        tickSize={0}
+        tick={{ dx: -20 }}
+      />
+      <Scatter data={parseRisktable(data, timeInterval)} fill="transparent">
+        <LabelList dataKey="nrisk" />
+      </Scatter>
+    </ScatterChart>
+  </ResponsiveContainer>
+)
+
+/**
+ * @param {Object} prop
+ * @param {RisktableData[]} prop.data
+ * @param {string} prop.stratificationVariable
+ * @param {number} prop.timeInterval
+ */
+const RiskTable = ({ data, stratificationVariable, timeInterval }) => (
   <div className={styles.container}>
     {data.length === 0 ? (
       <div className={styles.placeholder}>Rist table here</div>
     ) : (
       <>
         <span style={{ marginLeft: '1rem' }}># at risk</span>
-        <ResponsiveContainer
-          className="risktable"
-          height={(data.length + 2) * 30}
-        >
-          <ScatterChart
-            margin={{
-              left: isStratified(data) ? 80 : 20,
-              bottom: 10,
-              right: 20,
-            }}
-          >
-            <XAxis
-              dataKey="time"
-              type="number"
-              label={{
-                value: 'Time (in year)',
-                position: 'insideBottom',
-                offset: -5,
-              }}
-              ticks={getXAxisTicks(data, timeInterval)}
-              domain={['dataMin', getMaxTime(data)]}
-            />
-            <YAxis
-              dataKey="name"
-              type="category"
-              allowDuplicatedCategory={false}
-              axisLine={false}
-              reversed
-              tickSize={0}
-              tick={{ dx: -20 }}
-            />
-            <Scatter
-              data={parseRisktable(data, timeInterval)}
-              fill="transparent"
-            >
-              <LabelList dataKey="nrisk" />
-            </Scatter>
-          </ScatterChart>
-        </ResponsiveContainer>
+        {stratificationVariable === '' ? (
+          <Table data={data} timeInterval={timeInterval} isLast />
+        ) : (
+          Object.entries(
+            data.reduce((acc, { name, data }) => {
+              const [factorKey, stratificationKey] = name.split(',')
+              const stratificationValue = acc.hasOwnProperty(stratificationKey)
+                ? [...acc[stratificationKey], { name: factorKey, data }]
+                : [{ name: factorKey, data }]
+
+              return { ...acc, [stratificationKey]: stratificationValue }
+            }, {})
+          ).map(([key, data], i, arr) => (
+            <Fragment key={key}>
+              <h2 style={{ fontSize: '1rem' }}>{key}</h2>
+              <Table
+                data={data}
+                timeInterval={timeInterval}
+                isLast={i === arr.length - 1}
+              />
+            </Fragment>
+          ))
+        )}
       </>
     )}
   </div>
