@@ -77,17 +77,17 @@ const Table = ({ data, isLast, timeInterval }) => (
 /**
  * @param {Object} prop
  * @param {RisktableData[]} prop.data
- * @param {boolean} prop.isStratified
+ * @param {boolean} prop.notStratified
  * @param {number} prop.timeInterval
  */
-const RiskTable = ({ data, isStratified, timeInterval }) => (
+const RiskTable = ({ data, notStratified, timeInterval }) => (
   <div className={styles.container}>
     {data.length === 0 ? (
       <div className={styles.placeholder}>Rist table here</div>
     ) : (
       <>
         <span style={{ marginLeft: '1rem' }}># at risk</span>
-        {isStratified ? (
+        {notStratified ? (
           <Table data={data} timeInterval={timeInterval} isLast />
         ) : (
           Object.entries(
